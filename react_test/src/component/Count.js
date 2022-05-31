@@ -1,0 +1,55 @@
+import React, { useState } from "react";
+
+const Count = () =>{
+    const [number, setNumber] = useState(1);
+    const [inputNumber, setInputNumber] = useState(1);
+    const [isCheck, setIsCheck] = useState(false);
+    const selectList = [
+        {name: 1, value: 1},
+        {name: 2, value: 2},
+        {name: 3, value: 3},
+        {name: 4, value: 4},
+    ];
+    
+    const onChangeHandler = (e) => {
+        console.log(e.target);
+        const { value } = e.target;
+        setInputNumber(Number(value));
+
+    };
+
+    const onClickPlus = () => {
+        setNumber(number + inputNumber);
+    };
+
+    const onClickMinus = () => {
+        setNumber(number - inputNumber);
+    };
+
+    const onChangeCheckBox = () => {
+        setIsCheck(!isCheck);
+    };
+    
+    return (
+        <div>
+            <p>{`숫자 : ${number} 입니다.`}</p>
+            <p>
+                값 받아 변경하기 <input type="checkbox" checked={isCheck} onChange={onChangeCheckBox}></input>
+            </p>
+            {isCheck ? <input type="number" checked={inputNumber} onChange={onChangeHandler}></input> : null}
+            
+            <select onChange={onChangeHandler} value={inputNumber}>
+                {selectList.map((element, i) => (
+                    <option key={i} value={element.value}>
+                        {element.name}
+                    </option>
+                ))}
+
+            </select>
+            <button onClick={onClickPlus}>+</button>
+            <button onClick={onClickMinus}>-</button>
+        </div>
+    );
+};
+
+export default Count;
